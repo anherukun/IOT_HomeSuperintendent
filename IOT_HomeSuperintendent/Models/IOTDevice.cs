@@ -9,13 +9,13 @@ namespace IOT_HomeSuperintendent.Models
     public class IOTDevice
     {
         [Key] public string IDDevice { get; set; }
-        [Required] public string MacAddress { get; set; }
-        [Required] public string IPAddress { get; set; }
-        [Required] public string DeviceType { get; set; }
-        [Required] public string DeviceName { get; set; }
-        [Required] public string DataType { get; set; }
-        [Required] public string MeasurementUnit { get; set; }
-        [Required] public string FirmwareVersion { get; set; }
-        [Required] public string DeviceStatus { get; set; }
+        public string MacAddress { get; set; }
+        public string IPAddress { get; set; }
+        public string DeviceType { get; set; }
+        public string DeviceName { get; set; }
+        public string DataType { get; set; }
+        public string MeasurementUnit { get; set; }
+        public string FirmwareVersion { get; set; }
+        public string DeviceStatus { get; set; }
     }
 }

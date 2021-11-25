@@ -28,6 +28,15 @@ namespace IOT_HomeSuperintendent.Services
             }
         }
 
+        public static int Update(IOTDevice device)
+        {
+            using (var db = new Context())
+            {
+                db.Update<IOTDevice>(device) ;
+                return db.SaveChanges();
+            }
+        }
+
         public static List<IOTDevice> Get()
         {
             using (var db = new Context())

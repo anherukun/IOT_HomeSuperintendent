@@ -69,16 +69,28 @@ namespace IOT_HomeSuperintendent.Controllers.API
                 return BadRequest(ex);
             }
         }
-            // PUT api/<IOTDeviceController>/5
-            [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
-        // DELETE api/<IOTDeviceController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // POST api/<IOTDeviceController>
+        [HttpPost("Update/{q}")]
+        public IActionResult Add([FromBody] IOTDevice device, string q)
         {
+            if (!RepoIOTDevice.Exist(x => x.IDDevice == q))
+                return BadRequest(new { Response = "Device doesn't exist", Status = "Error" });
+            try
+            {
+                IOTDevice currentdevice = RepoIOTDevice.GetSingle(x => x.IDDevice == q);
+                currentdevice.IPAddress = device.IPAddress;
+                currentdevice.DeviceName = device.DeviceName;
+                currentdevice.DeviceStatus = device.DeviceStatus;
+
+                RepoIOTDevice.Update(currentdevice);
+
+                return CreatedAtAction(nameof(GetByID), new { id = currentdevice.IDDevice }, currentdevice);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }
