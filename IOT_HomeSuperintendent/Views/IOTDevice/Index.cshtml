@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "Dispositivos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<IOTDevice> devices = ViewData["devices"] as List<IOTDevice>;
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    @foreach (var item in devices)
+    {
+        <div class="col-md-4 offset-md" style="margin-bottom: 30px;">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md" style="display: flex; align-items: center;">
+                            @switch (item.DeviceType)
+                            {
+                                case "water_level_sensor":
+                                    <img class="card-img-top" src="/Images/sea-level.png" alt="Card image cap">
+                                    break;
+
+                                case "light_sensor":
+                                    <img class="card-img-top" src="/Images/sun.png" alt="Card image cap">
+                                    break;
+
+                                case "magnetic_sensor":
+                                    <img class="card-img-top" src="/Images/magneto.png" alt="Card image cap">
+                                    break;
+
+                                case "termal_ensor":
+                                    <img class="card-img-top" src="/Images/thermometer.png" alt="Card image cap">
+                                    break;
+
+                                default:
+                                    <img class="card-img-top" src="#" alt="Card image cap">
+                                    break;
+                            }
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-title" style="margin-bottom: 0;">@item.DeviceName</h5>
+                            <p class="card-text" style="margin-bottom: 0;">@item.IPAddress</p>
+                            <p class="card-text">@item.DeviceStatus</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,8 +1,48 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
+    var testdata = @IOT_HomeSuperintendent.Services.RepoData.Get().OrderByDescending(x => x.TimeStamp).Take(15);
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <canvas id="chart1"></canvas>
+        <script type="text/javascript">
+            @{
+                List<float> yvalues = new List<float>();
+                List<string> xvalues = new List<string>();
+                foreach (var item in testdata.OrderBy(x => x.TimeStamp))
+                {
+                    yvalues.Add(float.Parse(item.value));
+                }
+
+                foreach (var item in testdata.OrderBy(x => x.TimeStamp))
+                {
+                    xvalues.Add(item.DateTime.ToShortTimeString());
+                }
+            }
+
+            var xValues = @Html.Raw(Json.Serialize(xvalues));
+
+            new Chart("chart1", {
+                type: "line",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        data: @Html.Raw(Json.Serialize(yvalues)),
+                        borderColor: 'rgb(75, 192, 192)',
+                        fill: true
+                    }]
+                },
+                options: {
+                    tension: 0.25
+                }
+            });
+        </script>
+    </div>
 </div>

@@ -29,7 +29,9 @@ namespace IOT_HomeSuperintendent
 
             services.Configure<ForwardedHeadersOptions>(options =>
             {
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
                 options.KnownProxies.Add(IPAddress.Parse("192.168.31.13"));
+                options.KnownProxies.Add(IPAddress.Parse("192.168.31.65"));
             });
         }
 
