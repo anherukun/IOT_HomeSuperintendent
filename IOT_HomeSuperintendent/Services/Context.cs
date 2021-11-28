@@ -21,7 +21,7 @@ namespace IOT_HomeSuperintendent.Services
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 #if DEBUG
-            optionsBuilder.UseMySQL("server=localhost; port=3306; database=Superintendent-DEBUG; user=root; password=Ragnarok1");
+            optionsBuilder.UseMySQL("server=localhost; port=3306; database=Superintendent-DEBUG; user=root; password=doodlebundle");
 #else
             optionsBuilder.UseMySQL("server=localhost; port=3306; database=Superintendent-PROD; user=root; password=Ragnarok1");
 #endif
